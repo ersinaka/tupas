@@ -76,8 +76,14 @@ const nextConfig: NextConfig = {
   output: isGitHubPages ? "export" : "standalone",
   basePath: basePath || undefined,
   assetPrefix: basePath || undefined,
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
-    unoptimized: isGitHubPages,
+    unoptimized: true,
+    ...(isGitHubPages
+      ? { loader: "custom" as const, loaderFile: "./src/lib/image-loader.ts" }
+      : {}),
     formats: ["image/avif", "image/webp"],
   },
   trailingSlash: isGitHubPages,
