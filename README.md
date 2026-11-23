@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TÜPAŞ Kurumsal Web Sitesi
 
-## Getting Started
+Industrial Heritage — Modern Authority tasarım yönünde, Next.js App Router ile geliştirilmiş Türkçe kurumsal web sitesi.
 
-First, run the development server:
+## Teknoloji
+
+- Next.js 15 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS v4
+- Lucide ikonlar
+- Zod (sunucu tarafı form doğrulama)
+
+Veritabanı, CMS, kullanıcı hesabı ve e-ticaret **yok** (V1).
+
+## Yerel geliştirme
 
 ```bash
+cp .env.example .env.local
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Komutlar
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Komut | Açıklama |
+|---|---|
+| `npm run dev` | Geliştirme sunucusu |
+| `npm run build` | Production build |
+| `npm run start` | Production sunucu |
+| `npm run lint` | ESLint |
 
-## Learn More
+## Ortam değişkenleri
 
-To learn more about Next.js, take a look at the following resources:
+`.env.example` dosyasına bakın.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `NEXT_PUBLIC_SITE_URL` — kanonik URL (sitemap, OG, metadata)
+- `EMAIL_PROVIDER` — `webhook` \| `smtp` \| `log`
+- `EMAIL_FROM` / `EMAIL_TO`
+- Webhook için `EMAIL_WEBHOOK_URL` (+ opsiyonel `EMAIL_API_KEY`)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+E-posta yapılandırılmamışsa formlar **başarı iddiası yapmaz**; kullanıcıya açık hata döner.
 
-## Deploy on Vercel
+## İçerik düzenleme
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+İçerik `src/content/` altındadır:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Dosya | İçerik |
+|---|---|
+| `company.ts` | Firma, iletişim, güçlü yanlar |
+| `categories.ts` | Ürün kategorileri |
+| `products.ts` | Ürün kataloğu |
+| `solutions.ts` | Çözüm sayfaları |
+| `services.ts` | Hizmet sayfaları |
+| `info.ts` | Bilgi merkezi |
+| `navigation.ts` | Menü |
+
+Ürün modeli (`src/types/content.ts`): `slug`, `name`, `categorySlug`, `description`, `images`, `specifications`, `documents`, `quoteEnabled`, `meta`.
+
+**Kural:** Fiyat, stok, belge ve teknik rating uydurulmaz. Eksik alanlar `StatusNote` / yer tutucu ile işaretlenir.
+
+Proje dokümanları: `docs/project-plan.md`, `docs/content-inventory.md`, `docs/url-migration.md`, `docs/design-system.md`.
+
+## GitHub Pages
+
+Statik dışa aktarım ile yayınlanır (`npm run build:pages` → `out/`).
+
+- `main` dalına push sonrası `.github/workflows/deploy-pages.yml` otomatik deploy eder
+- Site: `https://<kullanici>.github.io/tupas/`
+- Form API’leri GitHub Pages’te çalışmaz (statik hosting); Node/Docker veya e-posta webhook gerekir
+- Yerel üretim (Node): `npm run build` → `standalone`
+
+## Docker
+
+```bash
+docker build -t tupas-web --build-arg NEXT_PUBLIC_SITE_URL=https://ornek.tld .
+docker run --rm -p 3000:3000 --env-file .env.local tupas-web
+```
+
+`output: "standalone"` kullanır (GitHub Pages dışındaki kurulumlar).
+
+### Hosting önkoşulları
+
+- Node.js 22+ veya Docker
+- HTTPS sonlandırma (ters vekil / load balancer)
+- Ortam değişkenleri (özellikle `NEXT_PUBLIC_SITE_URL` ve e-posta)
+- Statik varlıklar image içinde (`public/`)
+
+## SEO ve yönlendirmeler
+
+- Sayfa bazlı metadata + Open Graph
+- `sitemap.xml`, `robots.txt`
+- Eski `tupas.com.tr` URL’leri için 301 (`next.config.ts`)
+
+## Güvenlik notları
+
+- Formlarda honeypot + bellek içi rate limit
+- Hassas müşteri verisi loglanmaz
+- Gizler Git’e girmez (`.env*`)
+
+## Yayın öncesi şirket onayı
+
+- İletişim telefon / e-posta / adres / WhatsApp
+- ISO / TSE / CE belge dosyaları ve geçerlilik
+- Ürün görselleri ve teknik şartnameler
+- Referans logoları (izinli)
+- Yasal metinler (KVKK, gizlilik, çerez)

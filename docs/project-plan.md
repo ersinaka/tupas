@@ -41,14 +41,14 @@ Uzun soluklu bir yangın güvenlik firması için kurumsal güven, mühendislik 
 | Faz | Çıktı | Durum |
 |---|---|---|
 | 1 | Envanter + site incelemesi | Tamamlandı |
-| 2 | `project-plan`, `content-inventory`, `url-migration`, `design-system` | Bu belge seti |
-| 3 | Mimari, tokenlar, layout, nav, footer | Sırada |
-| 4 | Ana sayfa + ortak bileşenler | |
-| 5 | Kurumsal, çözümler, hizmetler, bilgi | |
-| 6 | Ürün kataloğu, arama, filtre, detay | |
-| 7 | İletişim / teklif formları | |
-| 8 | SEO, yönlendirmeler, a11y, Docker, README | |
-| 9 | Lint, typecheck, production build | |
+| 2 | `project-plan`, `content-inventory`, `url-migration`, `design-system` | Tamamlandı |
+| 3 | Mimari, tokenlar, layout, nav, footer | Tamamlandı |
+| 4 | Ana sayfa + ortak bileşenler | Tamamlandı |
+| 5 | Kurumsal, çözümler, hizmetler, bilgi | Tamamlandı |
+| 6 | Ürün kataloğu, arama, filtre, detay | Tamamlandı |
+| 7 | İletişim / teklif formları | Tamamlandı |
+| 8 | SEO, yönlendirmeler, a11y, Docker, README | Tamamlandı |
+| 9 | Lint, typecheck, production build | Tamamlandı (2026-11-23) |
 
 ## 5. Bilinçli kapsam sınırları (V1)
 
