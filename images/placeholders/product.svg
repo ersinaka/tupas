@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Ürün görseli yer tutucu">
+  <rect width="800" height="600" fill="#F2EFE8"/>
+  <rect x="40" y="40" width="720" height="520" fill="none" stroke="#777873" stroke-width="2"/>
+  <text x="400" y="290" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" fill="#252525">YER TUTUCU GÖRSEL</text>
+  <text x="400" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#777873">Şirket ürün fotoğrafı ile değiştirilecek</text>
+</svg>
