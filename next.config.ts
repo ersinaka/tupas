@@ -79,13 +79,14 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
-  images: {
-    unoptimized: true,
-    ...(isGitHubPages
-      ? { loader: "custom" as const, loaderFile: "./src/lib/image-loader.ts" }
-      : {}),
-    formats: ["image/avif", "image/webp"],
-  },
+  images: isGitHubPages
+    ? {
+        loader: "custom" as const,
+        loaderFile: "./src/lib/image-loader.ts",
+      }
+    : {
+        formats: ["image/avif", "image/webp"],
+      },
   trailingSlash: isGitHubPages,
   ...(isGitHubPages
     ? {}
